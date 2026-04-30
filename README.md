@@ -21,3 +21,66 @@ Upload a PDF → Ask a question → Get a cited, grounded answer in seconds.
 **DevOps:** Docker, CI/CD  
 
 ## Project Structure
+DocQuery/
+├── backend/
+│   ├── main.py           # FastAPI routes
+│   ├── embeddings.py     # OpenAI embedding logic
+│   ├── chunker.py        # PDF parsing and chunking
+│   ├── retriever.py      # Pinecone similarity search
+│   ├── generator.py      # GPT answer generation
+│   ├── database.py       # PostgreSQL setup
+│   ├── models.py         # SQLAlchemy models
+│   └── requirements.txt
+├── frontend/
+│   └── src/
+│       └── App.jsx
+└── README.md
+
+## Getting Started
+
+### Prerequisites
+- Python 3.10+
+- Node.js 18+
+- PostgreSQL
+- OpenAI API key
+- Pinecone API key
+
+### Backend Setup
+
+```bash
+cd backend
+pip install -r requirements.txt
+```
+
+Create a `.env` file:
+Run the server:
+
+```bash
+uvicorn main:app --reload
+```
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Key Features
+
+- **Zero hallucination** — model is constrained to answer only from uploaded document content
+- **Semantic search** — cosine similarity retrieval surfaces the most relevant chunks per query
+- **Inline citations** — every answer includes references to the source chunks it drew from
+- **Persistent storage** — full document and query history stored in PostgreSQL
+- **Fast retrieval** — Pinecone vector search returns top-3 chunks in milliseconds
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/upload` | Upload and ingest a PDF |
+| POST | `/query` | Ask a question against uploaded documents |
+| GET | `/documents` | List all uploaded documents |
+
+
